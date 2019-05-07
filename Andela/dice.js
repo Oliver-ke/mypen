@@ -1,7 +1,9 @@
 //Loads script only when the DOM has completely rendered
+
 document.addEventListener('DOMContentLoaded', () => {
 	//Dice sum algorithm function
 	const findDiceSum = (dice) => {
+		//debugger;
 		let sum = null;
 		let sixOrOneFound = null;
 		dice.forEach((val) => {

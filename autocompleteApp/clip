@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Mini App</title>
+
+    <style>
+
+      div.user-photo {
+        margin: 1em auto;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+
+      }
+
+      body{
+        background: white;
+      }
+
+      div.select{
+        margin-bottom: 2.5em;
+      }
+      .user-photo{width:150px; height: 150px; border-radius: 50%; overflow: hidden}
+      .details{color: #fff; background-color: #6200ee; font-size: 1.3em; margin-top: 4em; padding: 0.5em 1em 0.5em 1em}
+      .details p{margin: 0.3em}
+      #outcome{position: absolute; width: 100px; text-align: center; right: 2.2em; bottom: 6.5em}
+      #outcome h3{padding: 1em; background: #fff; border-radius: 10%; margin: 0px}
+      #outcome p{color: white;border-bottom: 5px solid white; font-size: 2em; margin: 0px; padding: 0.5em 0px 0.5em 0px}
+      #oracle{margin-top: 2.5em; width: 100%; border: 1px solid green}
+
+
+
+    </style>
+  </head>
+  <body>
+    <button  class="mdc-icon-button material-icons" id="filter-query">filter_list</button>
+    <div class="select">
+      <select class="select-text">
+        <option disabled selected>Select User</option>
+      </select>
+    </div>
+    <div class="user-photo">
+      <img src="https://via.placeholder.com/150" alt="profile-img"/>
+    </div>
+     <div class="details mdc-elevation--z3">
+       <p><span data-age="Age" class="prop"></span> <span class="value" data-age-value></span></p>
+       <p><span data-height="Height" class="prop"></span> <span class="value" data-height-value></span></p>
+       <p><span data-weight="Weight" class="prop"></span> <span class="value" data-weight-value></span></p>
+       <p><span data-gender="Gender" class="prop"></span> <span class="value" data-gender-value></span></p>
+       <p><span data-country="Country" class="prop"></span> <span class="value" data-country-value></span></p>
+    </div>
+    <button id="oracle" class="mdc-button" >Calculate BMI</button>
+       <div id="outcome">
+         <h3 class="mdc-typography--headline5">BM1</h3>
+           <p></p>
+       </div>
+    <script>
+
+      const users = []
+      const displaySelectedUser = ({target}) =>{
+        //function yet to be tested
+        let user = getSelectedUser(target.value);
+        let properties = Object.keys(user);
+        properties.forEach((property) =>{
+          let element = document.querySelector(`span[data-${property}-value]`);
+          element.innerText = property;
+        })
+      }
+      const letsCalculateBMI = () => {}
+
+      const powerupTheUI = () => {
+		let getSelect = document.querySelector('.select-text')
+        getSelect.addEventListener("change", displaySelectedUser);
+        let oracleBtn = document.querySelector("#oracle");
+        oracleBtn.addEventListener("click", letsCalculateBMI);
+
+      }
+
+      const getSelectedUser = (userId) =>{
+        let foundUser = users.find((user) =>{
+          if(user.id === userId){
+            return true;
+          }
+        })
+
+       return foundUser;
+      }
+
+      const displayUsers = (users) => {
+        let selectUI = document.querySelector('.select-text');
+            users.forEach((user)=>{
+              let option = document.createElement('option')
+              option.innerText = user.name
+              option.value = user.id;
+              selectUI.appendChild(option)
+            });
+      }
+
+
+      const fetchAndDisplayUsers = () => {
+        users.push({
+          age: 40,
+          weight: 75,
+          height: 6,
+          country: 'Nigeria',
+          name: 'Charles Odili',
+          id: 'dfhb454768DghtF'
+        });
+
+         users.push({
+          age: 25,
+          weight: 80,
+          height: 9,
+          country: 'Nigeria',
+          name: 'Gloria Ojuks',
+          id: 'ffhb423468Dghtm'
+        });
+
+        displayUsers(users);
+
+      };
+
+      const startApp = () => {
+        powerupTheUI()
+        fetchAndDisplayUsers()
+      };
+
+      startApp();
+
+    </script>
+  </body>
+</html>

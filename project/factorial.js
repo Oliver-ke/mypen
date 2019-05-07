@@ -6,7 +6,7 @@ const makeProfile = (name, age, avater) => {
 let arity = makeProfile.length;
 console.log(arity);
 
-//3
+//Result > 3
 
 //finding factorial using recorsion
 const findFactorial = (num) => {
@@ -32,6 +32,8 @@ const findFactorial2 = (num) => {
 		return num;
 	}
 };
+
+debugger;
 
 let factorial2 = findFactorial2(2);
 console.log(factorial2);
